@@ -25,4 +25,12 @@ describe(Restaurant) do
       expect(Restaurant.all()).to(eq([test_restaurant]))
     end
   end
+
+  describe("#==") do
+    it("is the same restaurant if it has the same name") do
+      restaurant1 = Restaurant.new({:name => "Ace's Cafe", :location => "Everett", :phone => "425-555-5555", :id => nil})
+      restaurant2 = Restaurant.new({:name => "Ace's Cafe", :location => "Everett", :phone => "425-555-5555", :id => nil})
+      expect(restaurant1).to(eq(restaurant2))
+    end
+  end
 end

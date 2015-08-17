@@ -15,7 +15,7 @@ class Restaurant
       name = restaurant.fetch('name')
       location = restaurant.fetch('location')
       phone = restaurant.fetch('phone')
-      id = restaurant.fetch('id')
+      id = restaurant.fetch('id').to_i
       restaurants.push(Restaurant.new({:name => name, :location => location, :phone => phone, :id => id}))
     end
     restaurants
@@ -24,5 +24,9 @@ class Restaurant
   define_method(:save) do
     result = DB.exec("INSERT INTO restaurant (name, location, phone) VALUES ('#{@name}', '#{@location}', '#{@phone}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
+  end
+
+  define_method(:==) do |another_restaurant|
+    self.name().==(another_restaurant.name()).&(self.id().==(another_restaurant.id()))
   end
 end

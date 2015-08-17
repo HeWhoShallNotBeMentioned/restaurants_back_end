@@ -26,6 +26,30 @@ describe(Restaurant) do
     end
   end
 
+  describe('#name') do
+    it("returns the restaurant name") do
+      restaurant = Restaurant.new({:name => 'Biscuits', :location => 'Vancouver', :phone => '(360) 910-7205', :id => nil})
+      restaurant.save()
+      expect(restaurant.name()).to(eq('Biscuits'))
+    end
+  end
+
+  describe('#location') do
+    it("returns the restaurant location") do
+      restaurant = Restaurant.new({:name => 'Biscuits', :location => 'Vancouver', :phone => '(360) 910-7205', :id => nil})
+      restaurant.save()
+      expect(restaurant.location()).to(eq('Vancouver'))
+    end
+  end
+
+  describe('#id') do
+    it("sets the instances' ID when saved") do
+      test_restaurant = Restaurant.new({:name => 'Biscuits', :location => 'Vancouver', :phone => '(360) 910-7205', :id => nil})
+      test_restaurant.save()
+      expect(test_restaurant.id()).to(be_an_instance_of(Fixnum))
+    end
+  end
+
   describe("#==") do
     it("is the same restaurant if it has the same name") do
       restaurant1 = Restaurant.new({:name => "Ace's Cafe", :location => "Everett", :phone => "425-555-5555", :id => nil})

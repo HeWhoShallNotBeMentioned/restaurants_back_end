@@ -25,7 +25,7 @@ class Restaurant
     result = DB.exec("INSERT INTO restaurant (name, location, phone) VALUES ('#{@name}', '#{@location}', '#{@phone}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
-
+  
   define_method(:==) do |another_restaurant|
     self.name().==(another_restaurant.name()).&(self.id().==(another_restaurant.id()))
   end

@@ -20,4 +20,13 @@ class Food
     end
     foods
   end
+
+  define_method(:save) do
+    DB.exec("INSERT INTO foods (type, cost, rating, restaurant_id) VALUES ('#{@type}', '#{@cost}', '#{@rating}', #{@restaurant_id})")
+  end
+
+  define_method(:==) do |another_food|
+    self.type().==(another_food.type).&(self.restaurant_id.==(another_food.restaurant_id()))
+  end
+
 end

@@ -1,15 +1,4 @@
-require("rspec")
-require("pg")
-require('restaurants')
-# require("foods")
-
-DB = PG.connect({:dbname => "restaurants_test"})
-RSpec.configure do |config|
-  config.after(:each) do
-    DB.exec("DELETE FROM restaurant *;")
-    DB.exec("DELETE FROM foods *;")
-  end
-end
+require('spec_helper')
 
 describe(Restaurant) do
   describe('.all') do

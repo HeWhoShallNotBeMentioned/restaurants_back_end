@@ -10,14 +10,19 @@ class Restaurant
 
   define_singleton_method(:all) do
     returned_restaurants = DB.exec("SELECT * FROM restaurant;")
-    restaurant = []
+    restaurants = []
     returned_restaurants.each() do |restaurant|
       name = restaurant.fetch('name')
       location = restaurant.fetch('location')
       phone = restaurant.fetch('phone')
       id = restaurant.fetch('id')
-      tasks.push(Restaurant.new({:name => name, :location => location, :phone => phone, :id => id}))
+      restaurants.push(Restaurant.new({:name => name, :location => location, :phone => phone, :id => id}))
     end
-    restaurant
+    restaurants
+  end
+
+  define_method(:save) do
+    result = DB.exec("INSERT INTO restaurant (name, location, phone) VALUES ('#{@name}', '#{@location}', '#{@phone}') RETURNING id;")
+    @id = result.first().fetch("id").to_i()
   end
 end

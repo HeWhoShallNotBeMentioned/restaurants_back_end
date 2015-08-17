@@ -29,4 +29,12 @@ class Food
     self.type().==(another_food.type).&(self.restaurant_id.==(another_food.restaurant_id()))
   end
 
+  describe("#==") do
+    it("is the same food if it has the same type and restaurant_ID") do
+      food1 = Food.new({:type => "salad", :cost => "10", :rating => "4", :restaurant_id => 1})
+      food2 = Food.new({:type => "salad", :cost => "10", :rating => "4", :restaurant_id => 1})
+      expect(food1).to(eq(food2))
+    end
+  end
+
 end
